@@ -21,4 +21,7 @@ const store = configureStore({
 export default store;
 
 // Development URL
-export const server='http://localhost:4000/api/v1'
+// export const server='http://localhost:4000/api/v1'
+
+//Production URL
+export const server='https://quickbuy-rpbz.onrender.com'
