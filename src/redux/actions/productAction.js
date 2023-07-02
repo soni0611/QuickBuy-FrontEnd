@@ -32,7 +32,7 @@ import axios from "axios";
 import { server } from "../store.js";
 
 export const getProduct =
-  (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
+  (keyword = "", currentPage = 1, price = [0, 25000000], category, ratings = 0) =>
   async (dispatch) => {
     try {
       dispatch({ type: All_PRODUCT_REQUEST });

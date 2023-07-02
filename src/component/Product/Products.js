@@ -6,8 +6,8 @@ import Loader from "../layout/Loader/Loader.js";
 import ProductCard from "../Home/ProductCard.js";
 import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
-// import Slider from "@material-ui/core/Slider.js";
-// import Typography from "@material-ui/core/Typography.js";
+import Slider from '@mui/material/Slider';
+import Typography from '@mui/material/Typography';
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData.js";
 const categories = [
@@ -65,15 +65,15 @@ const Products = () => {
               ))}
           </div>
           <div className="filterBox">
-            {/* <Typography>Price</Typography>
+            <Typography>Price</Typography>
             <Slider
               value={price}
               onChange={pricehandler}
               valueLabelDisplay="auto"
               min={0}
-              max={25000}
+              max={2500000}
             />
-            <Typography>Categories</Typography> */}
+            <Typography>Categories</Typography>
             <ul className="categoryBox">
               {categories.map((category) => (
                 <li
@@ -87,7 +87,7 @@ const Products = () => {
             </ul>
 
             <fieldset>
-              {/* <Typography component="legend">Ratings Above</Typography>
+              <Typography component="legend">Ratings Above</Typography>
               <Slider
                 value={ratings}
                 onChange={(e, newRating) => {
@@ -97,7 +97,7 @@ const Products = () => {
                 valueLabelDisplay="auto"
                 min={0}
                 max={5}
-              /> */}
+              />
             </fieldset>
           </div>
           {resultPerPage < count && (

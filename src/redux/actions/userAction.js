@@ -37,6 +37,7 @@ import {
   CLEAR_ERRORS,
 } from "../constants/userConstant.js";
 import axios from "axios";
+import { server } from "../store.js";
 
 // Login
 export const login = (email, password) => async (dispatch) => {
@@ -46,7 +47,7 @@ export const login = (email, password) => async (dispatch) => {
     const config = { headers: { "Content-Type": "application/json" } };
 
     const { data } = await axios.post(
-      `/api/v1/login`,
+      `${server}/login`,
       { email, password },
       config
     );
@@ -64,7 +65,7 @@ export const register = (userData) => async (dispatch) => {
 
     const config = { headers: { "Content-Type": "multipart/form-data" } };
 
-    const { data } = await axios.post(`/api/v1/register`, userData, config);
+    const { data } = await axios.post(`${server}/register`, userData, config);
 
     dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
   } catch (error) {

@@ -2,11 +2,11 @@ import React, { Fragment, useEffect, useRef, useState } from "react";
 import "./LoginSignup.css";
 import Loader from "../layout/Loader/Loader.js";
 import { useNavigate, useLocation } from "react-router-dom";
-
+import LockOpenIcon from "@mui/icons-material/LockOpen"
+import MailOutlineIcon from "@mui/icons-material/MailOutline"
+import FaceIcon from "@mui/icons-material/Face"
 import { Link } from "react-router-dom";
-import MailOutlineIcon from "@material-ui/icons/MailOutline.js";
-import LockOpenIcon from "@material-ui/icons/LockOpen.js";
-import FaceIcon from "@material-ui/icons/Face.js";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearErrors,
@@ -15,6 +15,7 @@ import {
 } from "../../redux/actions/userAction.js";
 import { useAlert } from "react-alert";
 const LoginSignup = () => {
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alert = useAlert();
@@ -72,16 +73,29 @@ const LoginSignup = () => {
     }
   };
   const registerDataChange = (e) => {
-    if (e.target.name === "avatar") {
+    if (e.target.name === "file") {
       const reader = new FileReader();
-
+  
       reader.onload = () => {
         if (reader.readyState === 2) {
-          setAvatarPreview(reader.result);
-          setAvatar(reader.result);
+          // Convert base64 to Blob
+          const base64ToBlob = async (base64Data) => {
+            const response = await fetch(base64Data);
+            const blobData = await response.blob();
+            return blobData;
+          };
+  
+          base64ToBlob(reader.result)
+            .then((blobData) => {
+              setAvatarPreview(reader.result);
+              setAvatar(blobData);
+            })
+            .catch((error) => {
+              console.error("Error converting base64 to Blob:", error);
+            });
         }
       };
-
+  
       reader.readAsDataURL(e.target.files[0]);
     } else {
       setUser({ ...user, [e.target.name]: e.target.value });
@@ -92,10 +106,10 @@ const LoginSignup = () => {
 
     const myForm = new FormData();
 
-    myForm.set("name", name);
-    myForm.set("email", email);
-    myForm.set("password", password);
-    myForm.set("avatar", avatar);
+    myForm.append("name", name);
+    myForm.append("email", email);
+    myForm.append("password", password);
+    myForm.append("file", avatar);
     dispatch(register(myForm));
   };
   return (
@@ -181,7 +195,7 @@ const LoginSignup = () => {
                   <img src={avatarPreview} alt="Avatar Preview" />
                   <input
                     type="file"
-                    name="avatar"
+                    name="file"
                     accept="image/*"
                     onChange={registerDataChange}
                   />

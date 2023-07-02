@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from "react";
-import Carousel from "react-material-ui-carousel";
 import { useSelector, useDispatch } from "react-redux";
 import {
   clearErrors,
@@ -21,6 +20,9 @@ import {
   Button,
 } from "@mui/material";
 import { Rating } from "@mui/material";
+import { Carousel } from 'react-responsive-carousel';
+import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
+import ImageZoom from 'react-image-zoom';
 import { NEW_REVIEW_RESET } from "../../redux/constants/productConstants.js";
 const ProductDetails = () => {
   const { id } = useParams();
@@ -111,8 +113,11 @@ const ProductDetails = () => {
                       src={item.url}
                       alt={`${i} Slide`}
                     />
+                    
                   ))}
+                 
               </Carousel>
+             
             </div>
             <div>
               <div className="detailsBlock-1">

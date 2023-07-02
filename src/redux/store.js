@@ -3,10 +3,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import { productDetailsReducer, productsReducer } from "./reducers/productReducers";
+import { userReducer } from "./reducers/userReducer";
 
 const reducer = combineReducers({
   products: productsReducer,
   productDetails: productDetailsReducer,
+  user: userReducer,
 });
 const middlewares = [thunk, logger];
 

@@ -8,7 +8,7 @@
 }
 
 .ProductDetails > div {
-  width: 100%;
+  width: 100% !important;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -16,6 +16,8 @@
   padding: 2vmax;
   box-sizing: border-box;
   border: 1px solid white;
+
+
 }
 
 .ProductDetails > div:last-child {
@@ -23,7 +25,8 @@
 }
 
 .CarouselImage {
-  width: 20vmax;
+  width: 10vmax;
+ 
   
 }
 
