@@ -24,4 +24,4 @@ export default store;
 // export const server='http://localhost:4000/api/v1'
 
 //Production URL
-export const server='https://quickbuy-rpbz.onrender.com'
+export const server='https://quickbuy-rpbz.onrender.com/api/v1'
