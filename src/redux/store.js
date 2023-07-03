@@ -10,7 +10,12 @@ const reducer = combineReducers({
   productDetails: productDetailsReducer,
   user: userReducer,
 });
-const middlewares = [thunk, logger];
+const middlewares = [thunk];
+if (process.env.NODE_ENV === "development") {
+  const { createLogger } = require("redux-logger");
+  const logger = createLogger();
+  middlewares.push(logger);
+}
 
 const store = configureStore({
     reducer,
@@ -20,8 +25,6 @@ const store = configureStore({
 
 export default store;
 
-// Development URL
-// export const server='http://localhost:4000/api/v1'
-
-//Production URL
-export const server='https://quickbuy-rpbz.onrender.com/api/v1'
+export const server = process.env.NODE_ENV === 'production'
+  ? 'https://quickbuy-rpbz.onrender.com/api/v1'
+  : 'http://localhost:4000/api/v1';
