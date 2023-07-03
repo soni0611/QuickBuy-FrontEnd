@@ -1,16 +1,16 @@
 import React, { Fragment, useState } from "react";
 import "./Header.css";
-import { SpeedDial, SpeedDialAction } from "@material-ui/lab";
-// import Backdrop from "@material-ui/core/Backdrop";
-import DashboardIcon from "@material-ui/icons/Dashboard.js";
-import PersonIcon from "@material-ui/icons/Person.js";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp.js";
-import ListAltIcon from "@material-ui/icons/ListAlt.js";
+import { SpeedDial, SpeedDialAction } from "@mui/material";
+import Backdrop from "@mui/material/Backdrop";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import PersonIcon from "@mui/icons-material/Person";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import ListAltIcon from "@mui/icons-material/ListAlt";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { logout } from "../../../redux/actions/userAction.js";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart.js";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 const UserOptions = ({ user }) => {
   const alert = useAlert();
   const navigate = useNavigate();
@@ -59,7 +59,7 @@ const UserOptions = ({ user }) => {
 
   return (
     <Fragment>
-      {/* <Backdrop open={open} style={{ zIndex: "10" }} /> */}
+      <Backdrop open={open} style={{ zIndex: "10" }} />
       <SpeedDial
         ariaLabel="SpeedDial tooltip example"
         onClose={() => setOpen(false)}

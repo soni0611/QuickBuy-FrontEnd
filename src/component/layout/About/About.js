@@ -1,9 +1,9 @@
 import React from "react";
 import "./aboutSection.css";
-import { Button, Typography, Avatar } from "@material-ui/core";
-import LinkedInIcon from "@material-ui/icons/LinkedIn.js";
-import InstagramIcon from "@material-ui/icons/Instagram.js";
-import GitHubIcon from "@material-ui/icons/GitHub.js";
+import { Button, Typography, Avatar } from "@mui/material";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import Capture from "../../../images/Capture.JPG";
 const About = () => {
   const visitInstagram = () => {

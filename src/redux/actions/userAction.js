@@ -44,7 +44,10 @@ export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: LOGIN_REQUEST });
 
-    const config = { headers: { "Content-Type": "application/json" } };
+    const config = { headers: { "Content-Type": "application/json" },
+
+    withCredentials: true,
+   };
 
     const { data } = await axios.post(
       `${server}/login`,
@@ -63,7 +66,7 @@ export const register = (userData) => async (dispatch) => {
   try {
     dispatch({ type: REGISTER_USER_REQUEST });
 
-    const config = { headers: { "Content-Type": "multipart/form-data" } };
+    const config = { headers: { "Content-Type": "multipart/form-data" },withCredentials: true };
 
     const { data } = await axios.post(`${server}/register`, userData, config);
 
@@ -81,7 +84,9 @@ export const loadUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST });
 
-    const { data } = await axios.get(`/api/v1/me`);
+    const { data } = await axios.get(`${server}/me`,{
+      withCredentials: true,
+    });
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
   } catch (error) {
@@ -92,7 +97,9 @@ export const loadUser = () => async (dispatch) => {
 // Logout User
 export const logout = () => async (dispatch) => {
   try {
-    await axios.get(`/api/v1/logout`);
+    await axios.get(`${server}/logout`,{
+      withCredentials: true,
+    });
 
     dispatch({ type: LOGOUT_SUCCESS });
   } catch (error) {

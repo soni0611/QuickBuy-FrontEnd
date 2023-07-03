@@ -1,14 +1,15 @@
 import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
-import logger from "redux-logger";
 import { productDetailsReducer, productsReducer } from "./reducers/productReducers";
 import { userReducer } from "./reducers/userReducer";
+import { cartReducer } from "./reducers/cartReducer";
 
 const reducer = combineReducers({
   products: productsReducer,
   productDetails: productDetailsReducer,
   user: userReducer,
+  cart: cartReducer,
 });
 const middlewares = [thunk];
 if (process.env.NODE_ENV === "development") {
