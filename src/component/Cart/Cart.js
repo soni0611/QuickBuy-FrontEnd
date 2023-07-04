@@ -6,8 +6,8 @@ import {
   addItemsToCart,
   removeItemsFromCart,
 } from "../../redux/actions/cartAction.js";
-import { Typography } from "@material-ui/core";
-import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart.js";
+import { Typography } from "@mui/material";
+import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 const Cart = () => {

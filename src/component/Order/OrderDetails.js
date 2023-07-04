@@ -3,7 +3,7 @@ import "./orderDetails.css";
 import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../layout/MetaData.js";
 import { Link } from "react-router-dom";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import {
   getOrderDetails,
   clearErrors,

@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import MetaData from "../layout/MetaData.js";
 import "./ConfirmOrder.css";
 import { Link } from "react-router-dom";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-const ConfirmOrder = ({ history }) => {
+const ConfirmOrder = () => {
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();

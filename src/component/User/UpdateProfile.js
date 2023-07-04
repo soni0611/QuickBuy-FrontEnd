@@ -1,8 +1,8 @@
 import React, { Fragment, useState, useEffect } from "react";
 import "./UpdateProfile.css";
 import Loader from "../layout/Loader/Loader.js";
-import MailOutlineIcon from "@material-ui/icons/MailOutline.js";
-import FaceIcon from "@material-ui/icons/Face.js";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import FaceIcon from "@mui/icons-material/Face";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearErrors,
@@ -40,8 +40,21 @@ const UpdateProfile = () => {
 
     reader.onload = () => {
       if (reader.readyState === 2) {
-        setAvatarPreview(reader.result);
-        setAvatar(reader.result);
+        // Convert base64 to Blob
+        const base64ToBlob = async (base64Data) => {
+          const response = await fetch(base64Data);
+          const blobData = await response.blob();
+          return blobData;
+        };
+
+        base64ToBlob(reader.result)
+          .then((blobData) => {
+            setAvatarPreview(reader.result);
+            setAvatar(blobData);
+          })
+          .catch((error) => {
+            console.error("Error converting base64 to Blob:", error);
+          });
       }
     };
 

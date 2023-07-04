@@ -1,14 +1,14 @@
 import React, { Fragment, useEffect } from "react";
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import "./myOrders.css";
 import { useSelector, useDispatch } from "react-redux";
 import { clearErrors, myOrders } from "../../redux/actions/orderAction.js";
 import Loader from "../layout/Loader/Loader.js";
 import { Link } from "react-router-dom";
 import { useAlert } from "react-alert";
-// import Typography from "@material-ui/core/Typography";
+import {Typography} from "@mui/material";
 import MetaData from "../layout/MetaData.js";
-import LaunchIcon from "@material-ui/icons/Launch.js";
+import LaunchIcon from "@mui/icons-material/Launch";
 
 const MyOrders = () => {
   const dispatch = useDispatch();
@@ -103,7 +103,7 @@ const MyOrders = () => {
             autoHeight
           />
 
-          {/* <Typography id="myOrdersHeading">{user.name}'s Orders</Typography> */}
+          <Typography id="myOrdersHeading">{user.name}'s Orders</Typography>
         </div>
       )}
     </Fragment>

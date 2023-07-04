@@ -111,9 +111,11 @@ export const updateProfile = (userData) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_PROFILE_REQUEST });
 
-    const config = { headers: { "Content-Type": "multipart/form-data" } };
+    const config = { headers: { "Content-Type": "multipart/form-data" },
+      withCredentials: true,
+     };
 
-    const { data } = await axios.put(`/api/v1/me/update`, userData, config);
+    const { data } = await axios.put(`${server}/me/update`, userData, config);
 
     dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
   } catch (error) {
@@ -128,10 +130,11 @@ export const updatePassword = (passwords) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_PASSWORD_REQUEST });
 
-    const config = { headers: { "Content-Type": "application/json" } };
+    const config = { headers: { "Content-Type": "application/json" },
+    withCredentials: true };
 
     const { data } = await axios.put(
-      `/api/v1/password/update`,
+      `${server}/password/update`,
       passwords,
       config
     );
@@ -149,9 +152,10 @@ export const forgotPassword = (email) => async (dispatch) => {
   try {
     dispatch({ type: FORGOT_PASSWORD_REQUEST });
 
-    const config = { headers: { "Content-Type": "application/json" } };
+    const config = { headers: { "Content-Type": "application/json" } ,
+    withCredentials: true };
 
-    const { data } = await axios.post(`/api/v1/password/forgot`, email, config);
+    const { data } = await axios.post(`${server}/password/forgot`, email, config);
 
     dispatch({ type: FORGOT_PASSWORD_SUCCESS, payload: data.message });
   } catch (error) {
@@ -167,10 +171,11 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
   try {
     dispatch({ type: RESET_PASSWORD_REQUEST });
 
-    const config = { headers: { "Content-Type": "application/json" } };
+    const config = { headers: { "Content-Type": "application/json" },
+    withCredentials: true  };
 
     const { data } = await axios.put(
-      `/api/v1/password/reset/${token}`,
+      `${server}/password/reset/${token}`,
       passwords,
       config
     );

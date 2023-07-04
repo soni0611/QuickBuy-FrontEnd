@@ -6,8 +6,8 @@ import { clearErrors, resetPassword } from "../../redux/actions/userAction.js";
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData.js";
-import LockOpenIcon from "@material-ui/icons/LockOpen.js";
-import LockIcon from "@material-ui/icons/Lock.js";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import LockIcon from "@mui/icons-material/Lock";
 import { useParams } from "react-router-dom";
 const ResetPassword = () => {
   const { token } = useParams();

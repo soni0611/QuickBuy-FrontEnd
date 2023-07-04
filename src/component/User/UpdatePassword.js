@@ -7,9 +7,9 @@ import { clearErrors, updatePassword } from "../../redux/actions/userAction.js";
 import { useAlert } from "react-alert";
 import { UPDATE_PASSWORD_RESET } from "../../redux/constants/userConstant.js";
 import MetaData from "../layout/MetaData.js";
-import LockOpenIcon from "@material-ui/icons/LockOpen.js";
-import LockIcon from "@material-ui/icons/Lock.js";
-import VpnKeyIcon from "@material-ui/icons/VpnKey.js";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import LockIcon from "@mui/icons-material/Lock";
+import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import { useNavigate } from "react-router-dom";
 const UpdatePassword = () => {
   const dispatch = useDispatch();

@@ -2,14 +2,19 @@ import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import { productDetailsReducer, productsReducer } from "./reducers/productReducers";
-import { userReducer } from "./reducers/userReducer";
+import { forgotPasswordReducer, profileReducer, userReducer } from "./reducers/userReducer";
 import { cartReducer } from "./reducers/cartReducer";
+import { myOrdersReducer, orderDetailsReducer } from "./reducers/orderReducer";
 
 const reducer = combineReducers({
   products: productsReducer,
   productDetails: productDetailsReducer,
   user: userReducer,
+  profile: profileReducer,
+  forgotPassword: forgotPasswordReducer,
   cart: cartReducer,
+  myOrders: myOrdersReducer,
+  orderDetails: orderDetailsReducer,
 });
 const middlewares = [thunk];
 if (process.env.NODE_ENV === "development") {
