@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useRef } from "react";
 import CheckoutSteps from "../Cart/CheckoutSteps.js";
 import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../layout/MetaData.js";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { useAlert } from "react-alert";
 import {
   CardNumberElement,
@@ -14,11 +14,12 @@ import {
 
 import axios from "axios";
 import "./payment.css";
-import CreditCardIcon from "@material-ui/icons/CreditCard.js";
-import EventIcon from "@material-ui/icons/Event.js";
-import VpnKeyIcon from "@material-ui/icons/VpnKey.js";
+import CreditCardIcon from "@mui/icons-material/CreditCard";
+import EventIcon from "@mui/icons-material/Event";
+import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import { createOrder, clearErrors } from "../../redux/actions/orderAction.js";
 import { useNavigate } from "react-router-dom";
+import { server } from "../../redux/store.js";
 const Payment = () => {
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
   const navigate = useNavigate();
@@ -55,9 +56,10 @@ const Payment = () => {
         headers: {
           "Content-Type": "application/json",
         },
+          withCredentials: true 
       };
       const { data } = await axios.post(
-        "/api/v1/payment/process",
+        `${server}/payment/process`,
         paymentData,
         config
       );
@@ -99,6 +101,7 @@ const Payment = () => {
           navigate("/success");
         } else {
           alert.error("There's some issue while processing payment ");
+          navigate("/fail");
         }
       }
     } catch (error) {

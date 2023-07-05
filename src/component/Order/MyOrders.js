@@ -10,9 +10,10 @@ import {Typography} from "@mui/material";
 import MetaData from "../layout/MetaData.js";
 import LaunchIcon from "@mui/icons-material/Launch";
 
+
 const MyOrders = () => {
   const dispatch = useDispatch();
-
+ 
   const alert = useAlert();
 
   const { loading, error, orders } = useSelector((state) => state.myOrders);
@@ -26,10 +27,11 @@ const MyOrders = () => {
       headerName: "Status",
       minWidth: 150,
       flex: 0.5,
-      cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
-          ? "greenColor"
-          : "redColor";
+      renderCell: (params) => {
+        const value = params.value; // Retrieve the cell value
+        const cellClassName = value === "Delivered" ? "greenColor" : "redColor";
+    
+        return <div className={cellClassName}>{value}</div>;
       },
     },
     {
@@ -57,8 +59,9 @@ const MyOrders = () => {
       sortable: false,
 
       renderCell: (params) => {
+        const orderId = params.row.id;
         return (
-          <Link to={`/order/${params.getValue(params.id, "id")}`}>
+          <Link to={`/order/${orderId}`}>
             <LaunchIcon />
           </Link>
         );

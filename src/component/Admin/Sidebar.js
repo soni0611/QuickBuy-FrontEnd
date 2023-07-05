@@ -2,15 +2,15 @@ import React from "react";
 import "./sidebar.css";
 import logo from "../../images/logo.png";
 import { Link } from "react-router-dom";
-import { TreeView, TreeItem } from "@material-ui/lab";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore.js";
-import PostAddIcon from "@material-ui/icons/PostAdd.js";
-import AddIcon from "@material-ui/icons/Add.js";
-import ImportExportIcon from "@material-ui/icons/ImportExport.js";
-import ListAltIcon from "@material-ui/icons/ListAlt.js";
-import DashboardIcon from "@material-ui/icons/Dashboard.js";
-import PeopleIcon from "@material-ui/icons/People.js";
-import RateReviewIcon from "@material-ui/icons/RateReview.js";
+import { TreeView, TreeItem } from "@mui/lab";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import PostAddIcon from "@mui/icons-material/PostAdd";
+import AddIcon from "@mui/icons-material/Add";
+import ImportExportIcon from "@mui/icons-material/ImportExport";
+import ListAltIcon from "@mui/icons-material/ListAlt";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import PeopleIcon from "@mui/icons-material/People";
+import RateReviewIcon from "@mui/icons-material/RateReview";
 
 const Sidebar = () => {
   return (

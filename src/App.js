@@ -3,13 +3,13 @@ import Header from "./component/layout/Header/Header.js";
 import Footer from "./component/layout/Footer/Footer.js";
 import WebFont from "webfontloader";
 import { Route, Routes } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Home from "./component/Home/Home.js";
 import ProductDetails from "./component/Product/ProductDetails.js";
 import Products from "./component/Product/Products";
 import Search from "./component/Product/Search";
 import LoginSignup from "./component/User/LoginSignup";
-import store from "./redux/store";
+import store, { server } from "./redux/store";
 import { loadUser } from "./redux/actions/userAction";
 import UserOptions from "./component/layout/Header/UserOptions.js";
 import { useSelector } from "react-redux";
@@ -29,8 +29,22 @@ import OrderSuccess from "./component/Cart/OrderSuccess";
 import OrderFail from "./component/Cart/OrderFail";
 import MyOrders from "./component/Order/MyOrders";
 import OrderDetails from "./component/Order/OrderDetails";
+import Canva from "./component/Product/Canva";
+import axios from "axios";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import Payment from "./component/Cart/Payment";
+import Dashboard from "./component/Admin/Dashboard";
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
+  const [stripeApiKey, setStripeApiKey] = useState("");
+
+  async function getStripeApiKey() {
+    const { data } = await axios.get(`${server}/stripeapikey`,{
+      withCredentials: true });
+
+    setStripeApiKey(data.stripeApiKey);
+  }
   useEffect(() => {
     WebFont.load({
       google: {
@@ -39,12 +53,20 @@ function App() {
     });
     store.dispatch(loadUser());
   }, []);
+  
+  
+  useEffect(() => {
+    if (isAuthenticated) {
+      getStripeApiKey();
+    }
+  }, [isAuthenticated]);
   // window.addEventListener("contextmenu", (e) => e.preventDefault());
   return (
     <>
       <Header />
       {isAuthenticated && <UserOptions user={user} />}
       <Routes>
+      <Route exact path="/canva" element={<Canva />} />
         <Route exact path="/" element={<Home />} />
         <Route exact path="/product/:id" element={<ProductDetails />} />
         <Route exact path="/products" element={<Products />} />
@@ -142,6 +164,31 @@ function App() {
             </ProtectedRoute>
           }
         />
+        {stripeApiKey && (
+          <Route
+            exact
+            path="/process/payment"
+            element={
+              <Elements stripe={loadStripe(stripeApiKey)}>
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <Payment />
+                </ProtectedRoute>
+              </Elements>
+            }
+          />
+        )}
+
+ {/* Admin Routes */}
+<Route
+          exact
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true}>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
          {/* Another Way to have Protected Routes
         <Route element={<ProtectedRoute isAuthenticated={isAuthenticated}></ProtectedRoute>}>
           <Route path="/account" element={<Profile/>}/>

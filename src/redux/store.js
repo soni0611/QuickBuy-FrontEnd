@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
-import { productDetailsReducer, productsReducer } from "./reducers/productReducers";
-import { forgotPasswordReducer, profileReducer, userReducer } from "./reducers/userReducer";
+import {  newReviewReducer, productDetailsReducer, productsReducer } from "./reducers/productReducers";
+import { allUsersReducer, forgotPasswordReducer, profileReducer, userReducer } from "./reducers/userReducer";
 import { cartReducer } from "./reducers/cartReducer";
-import { myOrdersReducer, orderDetailsReducer } from "./reducers/orderReducer";
+import { allOrdersReducer, myOrdersReducer, newOrderReducer, orderDetailsReducer } from "./reducers/orderReducer";
 
 const reducer = combineReducers({
   products: productsReducer,
@@ -13,8 +13,13 @@ const reducer = combineReducers({
   profile: profileReducer,
   forgotPassword: forgotPasswordReducer,
   cart: cartReducer,
+  newOrder: newOrderReducer,
   myOrders: myOrdersReducer,
   orderDetails: orderDetailsReducer,
+  newReview: newReviewReducer,
+  allOrders: allOrdersReducer,
+  allUsers: allUsersReducer,
+  
 });
 const middlewares = [thunk];
 if (process.env.NODE_ENV === "development") {
