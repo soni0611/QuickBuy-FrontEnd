@@ -57,13 +57,14 @@ function App() {
   
   useEffect(() => {
     dispatch(loadUser());
+    getStripeApiKey();
   }, [dispatch]);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      getStripeApiKey();
-    }
-  }, [isAuthenticated]);
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     getStripeApiKey();
+  //   }
+  // }, [isAuthenticated]);
   // window.addEventListener("contextmenu", (e) => e.preventDefault());
   return (
     <>
