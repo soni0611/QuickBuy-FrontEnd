@@ -52,19 +52,11 @@ function App() {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       },
     });
-   
-  }, []);
-  
-  useEffect(() => {
     dispatch(loadUser());
     getStripeApiKey();
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     getStripeApiKey();
-  //   }
-  // }, [isAuthenticated]);
+  
+  
   // window.addEventListener("contextmenu", (e) => e.preventDefault());
   return (
     <>
