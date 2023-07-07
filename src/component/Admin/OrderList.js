@@ -1,13 +1,13 @@
 import React, { Fragment, useEffect } from "react";
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import "./productList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useAlert } from "react-alert";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import MetaData from "../layout/MetaData.js";
-import EditIcon from "@material-ui/icons/Edit.js";
-import DeleteIcon from "@material-ui/icons/Delete.js";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import SideBar from "./Sidebar.js";
 import {
   deleteOrder,
@@ -16,7 +16,7 @@ import {
 } from "../../redux/actions/orderAction.js";
 import { DELETE_ORDER_RESET } from "../../redux/constants/orderConstants.js";
 import { useNavigate } from "react-router-dom";
-const OrderList = ({ history }) => {
+const OrderList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alert = useAlert();
@@ -57,10 +57,12 @@ const OrderList = ({ history }) => {
       headerName: "Status",
       minWidth: 150,
       flex: 0.5,
-      cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
-          ? "greenColor"
-          : "redColor";
+    
+      renderCell: (params) => {
+        const value = params.value; // Retrieve the cell value
+        const cellClassName = value === "Delivered" ? "greenColor" : "redColor";
+    
+        return <div className={cellClassName}>{value}</div>;
       },
     },
     {
@@ -87,15 +89,16 @@ const OrderList = ({ history }) => {
       type: "number",
       sortable: false,
       renderCell: (params) => {
+        const orderId = params.row.id;
         return (
           <Fragment>
-            <Link to={`/admin/order/${params.getValue(params.id, "id")}`}>
+            <Link to={`/admin/order/${orderId}`}>
               <EditIcon />
             </Link>
 
             <Button
               onClick={() =>
-                deleteOrderHandler(params.getValue(params.id, "id"))
+                deleteOrderHandler(orderId)
               }
             >
               <DeleteIcon />

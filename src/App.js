@@ -35,6 +35,14 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import Payment from "./component/Cart/Payment";
 import Dashboard from "./component/Admin/Dashboard";
+import ProductList from "./component/Admin/ProductList";
+import NewProduct from "./component/Admin/NewProduct";
+import UpdateProduct from "./component/Admin/UpdateProduct";
+import OrderList from "./component/Admin/OrderList";
+import ProcessOrder from "./component/Admin/ProcessOrder";
+import UsersList from "./component/Admin/UsersList";
+import UpdateUser from "./component/Admin/UpdateUser";
+import ProductReviews from "./component/Admin/ProductReviews";
 function App() {
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -52,11 +60,20 @@ function App() {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       },
     });
+   
+  }, []);
+  
+  useEffect(() => {
+    
     dispatch(loadUser());
-    getStripeApiKey();
+    
   }, [dispatch]);
-  
-  
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      getStripeApiKey();
+    }
+  }, [isAuthenticated]);
   // window.addEventListener("contextmenu", (e) => e.preventDefault());
   return (
     <>
@@ -185,7 +202,79 @@ function App() {
             </ProtectedRoute>
           }
         />
+ <Route
+          exact
+          path="/admin/products"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true}>
+              <ProductList />
+            </ProtectedRoute>
+          }
+        />
+         <Route
+          exact
+          path="/admin/product"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true}>
+              <NewProduct />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          exact
+          path="/admin/product/:id"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true}>
+              <UpdateProduct />
+            </ProtectedRoute>
+          }
+        />
+         <Route
+          exact
+          path="/admin/orders"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true}>
+              <OrderList />
+            </ProtectedRoute>
+          }
+        />
 
+        <Route
+          exact
+          path="/admin/order/:id"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true}>
+              <ProcessOrder />
+            </ProtectedRoute>
+          }
+        />
+         <Route
+          exact
+          path="/admin/users"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true}>
+              <UsersList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          exact
+          path="/admin/user/:id"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true}>
+              <UpdateUser />
+            </ProtectedRoute>
+          }
+        />
+         <Route
+          exact
+          path="/admin/reviews"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true}>
+              <ProductReviews />
+            </ProtectedRoute>
+          }
+        />
          {/* Another Way to have Protected Routes
         <Route element={<ProtectedRoute isAuthenticated={isAuthenticated}></ProtectedRoute>}>
           <Route path="/account" element={<Profile/>}/>

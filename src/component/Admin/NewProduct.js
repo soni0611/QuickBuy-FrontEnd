@@ -6,13 +6,13 @@ import {
   createProduct,
 } from "../../redux/actions/productAction.js";
 import { useAlert } from "react-alert";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import MetaData from "../layout/MetaData.js";
-import AccountTreeIcon from "@material-ui/icons/AccountTree.js";
-import DescriptionIcon from "@material-ui/icons/Description.js";
-import StorageIcon from "@material-ui/icons/Storage.js";
-import SpellcheckIcon from "@material-ui/icons/Spellcheck.js";
-import AttachMoneyIcon from "@material-ui/icons/AttachMoney.js";
+import AccountTreeIcon from "@mui/icons-material/AccountTree";
+import DescriptionIcon from "@mui/icons-material/Description";
+import StorageIcon from "@mui/icons-material/Storage";
+import SpellcheckIcon from "@mui/icons-material/Spellcheck";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import SideBar from "./Sidebar.js";
 import { NEW_PRODUCT_RESET } from "../../redux/constants/productConstants.js";
 import { useNavigate } from "react-router-dom";

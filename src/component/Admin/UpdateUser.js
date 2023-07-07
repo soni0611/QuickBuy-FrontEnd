@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useAlert } from "react-alert";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import MetaData from "../layout/MetaData.js";
-import MailOutlineIcon from "@material-ui/icons/MailOutline.js";
-import PersonIcon from "@material-ui/icons/Person.js";
-import VerifiedUserIcon from "@material-ui/icons/VerifiedUser.js";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import PersonIcon from "@mui/icons-material/Person";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import SideBar from "./Sidebar.js";
 import { UPDATE_USER_RESET } from "../../redux/constants/userConstant.js";
 import {

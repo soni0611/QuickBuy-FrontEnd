@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import "./productReviews.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -8,10 +8,10 @@ import {
   deleteReviews,
 } from "../../redux/actions/productAction.js";
 import { useAlert } from "react-alert";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import MetaData from "../layout/MetaData.js";
-import DeleteIcon from "@material-ui/icons/Delete.js";
-import Star from "@material-ui/icons/Star.js";
+import DeleteIcon from "@mui/icons-material/Delete.js";
+import Star from "@mui/icons-material/Star";
 import { useNavigate } from "react-router-dom";
 import SideBar from "./Sidebar.js";
 import { DELETE_REVIEW_RESET } from "../../redux/constants/productConstants.js";
@@ -85,10 +85,11 @@ const ProductReviews = () => {
       minWidth: 180,
       flex: 0.4,
 
-      cellClassName: (params) => {
-        return params.getValue(params.id, "rating") >= 3
-          ? "greenColor"
-          : "redColor";
+      renderCell: (params) => {
+        const value = params.value; // Retrieve the cell value
+        const cellClassName = value >= 3 ? "greenColor" : "redColor";
+
+        return <div className={cellClassName}>{value}</div>;
       },
     },
 
@@ -100,11 +101,12 @@ const ProductReviews = () => {
       type: "number",
       sortable: false,
       renderCell: (params) => {
+        const productId = params.row.id;
         return (
           <Fragment>
             <Button
               onClick={() =>
-                deleteReviewHandler(params.getValue(params.id, "id"))
+                deleteReviewHandler(productId)
               }
             >
               <DeleteIcon />

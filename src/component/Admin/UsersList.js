@@ -1,13 +1,13 @@
 import React, { Fragment, useEffect } from "react";
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import "./productList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useAlert } from "react-alert";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import MetaData from "../layout/MetaData.js";
-import EditIcon from "@material-ui/icons/Edit.js";
-import DeleteIcon from "@material-ui/icons/Delete.js";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import SideBar from "./Sidebar.js";
 import {
   getAllUsers,
@@ -75,10 +75,11 @@ const UsersList = () => {
       type: "number",
       minWidth: 150,
       flex: 0.3,
-      cellClassName: (params) => {
-        return params.getValue(params.id, "role") === "admin"
-          ? "greenColor"
-          : "redColor";
+      renderCell: (params) => {
+        const value = params.value; // Retrieve the cell value
+        const cellClassName = value === "admin" ? "greenColor" : "redColor";
+
+        return <div className={cellClassName}>{value}</div>;
       },
     },
 
@@ -90,17 +91,14 @@ const UsersList = () => {
       type: "number",
       sortable: false,
       renderCell: (params) => {
+        const userId = params.row.id;
         return (
           <Fragment>
-            <Link to={`/admin/user/${params.getValue(params.id, "id")}`}>
+            <Link to={`/admin/user/${userId}`}>
               <EditIcon />
             </Link>
 
-            <Button
-              onClick={() =>
-                deleteUserHandler(params.getValue(params.id, "id"))
-              }
-            >
+            <Button onClick={() => deleteUserHandler(userId)}>
               <DeleteIcon />
             </Button>
           </Fragment>
