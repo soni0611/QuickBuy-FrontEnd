@@ -60,20 +60,16 @@ function App() {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       },
     });
-   
+    dispatch(loadUser());
   }, []);
   
-  useEffect(() => {
-    
-    dispatch(loadUser());
-    
-  }, [dispatch]);
+  
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      getStripeApiKey();
-    }
-  }, [isAuthenticated]);
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     getStripeApiKey();
+  //   }
+  // }, [isAuthenticated]);
   // window.addEventListener("contextmenu", (e) => e.preventDefault());
   return (
     <>
@@ -178,7 +174,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        {stripeApiKey && (
+        {/* {stripeApiKey && (
           <Route
             exact
             path="/process/payment"
@@ -190,7 +186,7 @@ function App() {
               </Elements>
             }
           />
-        )}
+        )} */}
 
  {/* Admin Routes */}
 <Route
