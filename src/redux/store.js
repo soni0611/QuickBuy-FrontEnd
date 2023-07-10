@@ -42,6 +42,8 @@ const store = configureStore({
 
 export default store;
 
-export const server = process.env.NODE_ENV === 'production'
-  ? 'https://quickbuy-rpbz.onrender.com/api/v1'
-  : 'http://localhost:4000/api/v1';
+// export const server = process.env.NODE_ENV === 'production'
+//   ? 'https://quickbuy-rpbz.onrender.com/api/v1'
+//   : 'http://localhost:4000/api/v1';
+  export const server = 'https://quickbuy-rpbz.onrender.com/api/v1'
+  
